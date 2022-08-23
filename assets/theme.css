@@ -47,6 +47,10 @@ body.light {
     background-color: var(--bkg-color);
   }
 
+  table {
+    margin: 10px;
+  }
+
   .theme-icon {
     height: var(--theme-icon-size);
     width: var(--theme-icon-size);

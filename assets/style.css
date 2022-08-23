@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 50px;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 10px;
 }
@@ -116,5 +116,27 @@ body {
 
 .edit {
     display: inline;
+}
+
+#legendToggle {
+    margin-right: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.23em;
+}
+
+#sanskrit {
+    position: relative;
+}
+
+#editorHint {
+    position: absolute;
+    z-index: 1000;
+    font-family: monospace !important;
+    font-size: 1.2em;
+}
+
+#editorHint > pre, h3, ul>li {
+    font-family: monospace !important;
 }
 

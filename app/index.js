@@ -1,5 +1,20 @@
 import "./theme.js";
-// āīūśṣṛḥṅṭḍṇñṁ
+//ṁḥāīūṛṅñḍṇṭṣś
+const keys = [
+    "m*",
+    "h.",
+    "a_",
+    "i_",
+    "u_",
+    "r.",
+    "n*",
+    "n~",
+    "d.",
+    "n.",
+    "t.",
+    "s.",
+    "s`"
+];
 const replaceMap = {
     "m*": { roman: "ṁ", type: "anusvāra", sound: "n in French word bon" },
     "h.": { roman: "ḥ", type: "visarga", sound: "final h sound. When at the end repeat the preceding vowel aḥ = aha" },
@@ -28,4 +43,62 @@ function keyUp(e) {
     textArea.selectionStart = selectionStart - matches;
     textArea.selectionEnd = textArea.selectionStart;
 }
-document.getElementById("sanskrit").onkeyup = keyUp;
+function insertRoman(e) {
+    const cell = e.target;
+    const textArea = document.getElementById("sanskrit");
+    textArea.setRangeText(cell.textContent);
+    textArea.focus();
+}
+function setupLegend() {
+    const table = document.getElementById("legend");
+    document.getElementById("legendData").innerHTML = "";
+    keys.forEach((key) => {
+        const row = table.insertRow();
+        const roman = row.insertCell();
+        const keyStroke = row.insertCell();
+        const type = row.insertCell();
+        const sound = row.insertCell();
+        roman.textContent = replaceMap[key].roman;
+        roman.style.textAlign = "right";
+        roman.style.cursor = "pointer";
+        roman.onclick = insertRoman;
+        keyStroke.textContent = key;
+        type.textContent = replaceMap[key].type;
+        type.style.textAlign = "right";
+        sound.textContent = replaceMap[key].sound;
+    });
+}
+function toggleLegend() {
+    const table = document.getElementById("legend");
+    table.style.display = table.style.display === "none" ? "block" : "none";
+}
+function positionEditorHint() {
+    const hint = document.getElementById("editorHint");
+    const textArea = document.getElementById("sanskrit");
+    hint.style.top = `${textArea.offsetTop}px`;
+    hint.style.left = `${textArea.offsetLeft + 20}px`;
+}
+function toggleEditorHint(e) {
+    const hint = document.getElementById("editorHint");
+    const textArea = document.getElementById("sanskrit");
+    const shouldDisplay = textArea.value.trim() === "";
+    if (shouldDisplay) {
+        hint.style.display = textArea === document.activeElement ? "none" : "block";
+    }
+    else {
+        hint.style.display = "none";
+    }
+    positionEditorHint();
+}
+(() => {
+    setupLegend();
+    const textArea = document.getElementById("sanskrit");
+    textArea.onblur = toggleEditorHint;
+    textArea.onfocus = toggleEditorHint;
+    textArea.onkeyup = keyUp;
+    new ResizeObserver(positionEditorHint).observe(textArea);
+    document.getElementById("legendToggle").onclick = toggleLegend;
+    document.onresize = positionEditorHint;
+    document.getElementById("editorHint").onclick = () => { textArea.focus(); };
+    positionEditorHint();
+})();
