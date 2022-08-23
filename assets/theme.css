@@ -1,0 +1,77 @@
+:root {
+  --tile-title-height: 1.23em;
+  --theme-icon-size: 32px;
+  --selected-border-color: rgb(68, 177, 255)
+}
+
+/*
+  SEE: sanskrit.mvc/src/lib/Theme.ts for dark/light theme
+       definitions and script
+*/
+
+body.light {
+    --text-color: rgb(110, 110, 110);
+    --bkg-color: rgba(250, 241, 241, 0.854);
+    --border-color: #aeaeae;
+    --theme-icon: url('/assets/dark-mode.svg');
+    --box-shadow-color: rgba(40, 40, 40, 0.551);
+    /* transition: all 2s ease-in-out; */
+  }
+  body.dark {
+    --text-color: rgba(255, 252, 233, 0.921);
+    --bkg-color: #242424;
+    --border-color: rgba(226, 224, 198, 0.743);
+    --theme-icon: url('/assets/light-mode.svg');
+    --box-shadow-color: rgb(0, 0, 0);
+    /* transition: all 2s ease-in-out; */
+  }
+  
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  body {
+    background: var(--bkg-color);
+  }
+  
+  h1,
+  p,
+  div {
+    color: var(--text-color);
+  }
+
+  textarea {
+    margin: 10px;
+    padding: 10px;
+    color: var(--text-color);
+    background-color: var(--bkg-color);
+  }
+
+  .theme-icon {
+    height: var(--theme-icon-size);
+    width: var(--theme-icon-size);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.theme-icon > svg {
+    fill: var(--text-color);
+    height: var(--theme-icon-size);
+    width: var(--theme-icon-size);
+}
+
+body.dark .theme-icon > svg.dark-theme-icon {
+  display: inline;
+}
+
+body.dark .theme-icon > svg.light-theme-icon {
+    display: none;
+}
+
+body.light .theme-icon > svg.dark-theme-icon {
+    display: none;
+}
+  
+body.light .theme-icon > svg.light-theme-icon {
+      display: inline;
+}

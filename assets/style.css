@@ -1,0 +1,120 @@
+body {
+    margin: 0px; /* No scroll bars */
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.app-content {
+    display: flex;
+    flex-direction: row;
+    /* border: solid rebeccapurple 1px; */
+    height: calc(100% - 50px);
+}
+
+#StudyList {
+    border: solid red 1px;
+    display: flex;
+    align-self: stretch;
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-items: stretch;
+    width: 23%;
+}
+
+#StudyListItems {
+    flex: 1 1 1px; /* flex-grow: 1; flex-shrink: 1; flex-basis: 0 */
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    height: 100%;
+    width: 100%;
+    padding-right: 10px;
+}
+
+#StudyListItems::-webkit-scrollbar {
+    display: none;
+}
+
+#StudyListAddButton {
+    margin-top: auto;
+    align-self: stretch;
+}
+
+.study {
+    border: solid red 1px;
+    display: flex;
+    align-self: stretch;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-items: stretch;
+    width: 100%; 
+}
+
+.tile {
+    z-index: 0;
+    display: flex;
+    flex-direction: column; 
+    border-radius: 5px;
+    border: solid 1px var(--border-color);
+    cursor: alias;
+    margin-bottom: 10px;
+}
+
+.selected {
+    border: solid var(--selected-border-color) 2px;
+    box-shadow: 2px 2px 6px var(--box-shadow-color);
+}
+
+.tile-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 1;
+    border-bottom: solid 1px var(--border-color);
+    font-size: var(--tile-title-height);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5px;
+}
+
+.tile-description {
+    padding: 5px;
+    display: flex;
+    font-family: monospace;
+}
+
+.study-tile-svg {
+    height: var(--tile-title-height);
+    width: auto;
+    fill: var(--border-color); /* <-- theme.css */
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.svg-button {
+    background: none;
+    border: none;
+}
+
+.edit {
+    display: inline;
+}
+
