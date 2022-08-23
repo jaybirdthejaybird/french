@@ -1,4 +1,4 @@
-import "./Theme.js";
+import "./theme.js";
 // āīūśṣṛḥṅṭḍṇñṁ
 const replaceMap = {
     "m*": { roman: "ṁ", type: "anusvāra", sound: "n in French word bon" },
