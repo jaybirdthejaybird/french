@@ -56,8 +56,8 @@ and 2 creating a simple `tsconfig.json` as follows:
 > import { Study } from "./Study.js";  
 > ```
 
-### `sanskrit.mvc\app` folder
-- This folder is created by running `C:\...\sanskrit.mvc\> tsc` on the command line
+### `sanskrit-lite\app` folder
+- This folder is created by running `C:\...\sanskrit-lite\> tsc` on the command line
 - This folder is the build directory for `tsc`
 - This is the folder that would be deployed along with any other assets
 
