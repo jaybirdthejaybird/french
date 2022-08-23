@@ -1,5 +1,5 @@
 
-import "./Theme.js"
+import "./theme.js"
 // āīūśṣṛḥṅṭḍṇñṁ
 
 const replaceMap = {
