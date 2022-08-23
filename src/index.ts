@@ -108,6 +108,10 @@ function toggleEditorHint(e: Event) {
     positionEditorHint()
 }
 
+function navigateToGitHub() {
+    window.open("https://github.com/markdavich/sanskrit-lite.git", "_blank")
+}
+
 (() => {
     setupLegend()
     const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
@@ -118,5 +122,6 @@ function toggleEditorHint(e: Event) {
     document.getElementById("legendToggle").onclick = toggleLegend
     document.onresize = positionEditorHint
     document.getElementById("editorHint").onclick = () => {textArea.focus()}
+    document.getElementById("appTitle").onclick = navigateToGitHub
     positionEditorHint()
 })();
