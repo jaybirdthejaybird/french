@@ -54,6 +54,7 @@ function insertRoman(e: Event) {
     const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
     textArea.setRangeText(cell.textContent)
     textArea.focus()
+    textArea.selectionStart = textArea.selectionStart + 1
 }
 
 function setupLegend() {

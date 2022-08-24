@@ -48,6 +48,7 @@ function insertRoman(e) {
     const textArea = document.getElementById("sanskrit");
     textArea.setRangeText(cell.textContent);
     textArea.focus();
+    textArea.selectionStart = textArea.selectionStart + 1;
 }
 function setupLegend() {
     const table = document.getElementById("legend");
