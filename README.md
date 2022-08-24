@@ -37,8 +37,8 @@ and 2 creating a simple `tsconfig.json` as follows:
 
 ## Get the project 
 1. `C:\> git clone https://github.com/markdavich/sanskrit.mvc.git`
-2. Install **TypeScript** with `C:\> npm install --global typescript`
-3. Install **http-server** with `C:\> npm install --global http-server` ([http-server])
+2. Install **TypeScript** with `C:\> npm install --location=global typescript`
+3. Install **http-server** with `C:\> npm install --location=global http-server` ([http-server])
 4. `C:\> cd sanskrit.mvc`
 5. `C:\sanskrit.mvc> code -r .`
 6. Compile the project with `C:\sanskrit.mvc> tsc` (This puts all the distributable source into the **app** folder)
