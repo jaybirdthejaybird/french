@@ -1,6 +1,6 @@
 
 import "./theme.js"
-
+let fileName = ""
 //ṁḥāīūṛṅñḍṇṭṣś
 
 const keys = [
@@ -113,16 +113,53 @@ function navigateToGitHub() {
     window.open("https://github.com/markdavich/sanskrit-lite.git", "_blank")
 }
 
+function positionDownloadButton() {
+    const download = document.getElementById("downloadText")
+    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+
+    setTimeout(() => {
+        download.style.top = `${textArea.offsetTop}px`
+        download.style.left = `${textArea.offsetLeft + textArea.offsetWidth - download.clientWidth - 20}px`
+    }, 10)
+
+}
+
+function textAreaMouseUp() {
+    const download = document.getElementById("downloadText")
+    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const shouldDisplay = textArea === document.activeElement && window.getSelection && window.getSelection().toString() !== ''
+    download.style.display = shouldDisplay ? "block" : "none"
+    fileName = shouldDisplay ? window.getSelection().toString() : ""
+    positionDownloadButton()
+}
+
+function download(e: Event) {
+    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textArea.value));
+    element.setAttribute('download', `${fileName}.txt`);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
+
 (() => {
     setupLegend()
     const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
     textArea.onblur = toggleEditorHint 
     textArea.onfocus = toggleEditorHint
     textArea.onkeyup = keyUp;
+    textArea.onmouseup = textAreaMouseUp
     new ResizeObserver(positionEditorHint).observe(textArea)
     document.getElementById("legendToggle").onclick = toggleLegend
     document.onresize = positionEditorHint
     document.getElementById("editorHint").onclick = () => {textArea.focus()}
     document.getElementById("appTitle").onclick = navigateToGitHub
+    document.getElementById("downloadText").onclick = download
     positionEditorHint()
 })();
