@@ -150,3 +150,9 @@ height:85vh;
 display:block;
 }
 
+#legend > tbody {
+    overflow-y:scroll;
+    height:85vh;
+    display:block; 
+}
+
