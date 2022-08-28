@@ -1,4 +1,4 @@
-import "./theme.js";
+import "./lib/Theme.js";
 let fileName = "";
 //ṁḥāīūṛṅñḍṇṭṣś
 const keys = [
