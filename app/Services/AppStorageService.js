@@ -2,6 +2,7 @@ import AppStorage from "../Models/AppStorage.js";
 import uuidv4 from "../lib/uuidv4.js";
 import Subject from "../Models/Subject.js";
 import App from "../lib/App.js";
+import { EventNotifier } from "../lib/EventNotifier/index.js";
 // The service needs
 // set activeSubjectId
 // get subjects
@@ -14,10 +15,11 @@ export default class AppStorageService {
     set activeSubjectId(id) {
         const data = this.appData;
         if (!data.subjectIds.includes(id)) {
-            throw new Error(`Subject Id: ${id} does not exist, can't update subject.`);
+            throw new Error(`Subject Id: ${id} does not exist, can't switch subjects.`);
         }
         data.activeSubjectId = id;
         this.appData = data;
+        EventNotifier.onActiveSubjectChange.dispatch;
     }
     get newSubjectId() {
         let result = uuidv4();

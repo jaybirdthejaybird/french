@@ -1,6 +1,7 @@
 import AppStorageService from "./AppStorageService.js";
 import Study from "../Models/Study.js";
 import uuidv4 from "../lib/uuidv4.js";
+import { EventNotifier } from "../lib/EventNotifier/index.js";
 // The service needs
 // - AppStorageService
 // - \_ Subject
@@ -13,9 +14,6 @@ import uuidv4 from "../lib/uuidv4.js";
 export default class SubjectService {
     _service = new AppStorageService();
     _subject = this._service.subject;
-    _callbacks = [];
-    set onActiveStudyChange(callbacks) {
-    }
     get studies() {
         return this._subject.studyIds.map(id => this._subject.studies[id]);
     }
@@ -28,6 +26,7 @@ export default class SubjectService {
             this._subject.studies[id].selected = this._subject.studies[id].id === id;
         });
         this.save();
+        EventNotifier.onActiveStudyChange.dispatch();
     }
     get title() {
         return this._subject.title;

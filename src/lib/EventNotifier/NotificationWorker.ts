@@ -1,19 +1,18 @@
-import Notifier from "./Notifer.js"
-
-export default class NotificationWorker implements Notifier {
-    private static _instance: Notifier
-    private static _subscribers: Array<Function> = []
+export default class NotificationWorker {
+    private static _instances: {[name: string]: NotificationWorker}
+    private static _subscribers: {[name: string]: Array<Function>} = {}
     private constructor() {}
-    static get instance(): Notifier {
-        if (NotificationWorker._instance === null) {
-            NotificationWorker._instance = new NotificationWorker()
+    static getInstance(name: string): NotificationWorker {
+        if (NotificationWorker._instances[name] === null) {
+            NotificationWorker._instances[name] = new NotificationWorker()
+            NotificationWorker._subscribers[name] = []
         }
-        return NotificationWorker._instance
+        return NotificationWorker._instances[name]
     }
-    subscribe(subscriber: Function): void {
-        NotificationWorker._subscribers.push(subscriber)
+    subscribe(instance: string, subscriber: Function): void {
+        NotificationWorker._subscribers[instance].push(subscriber)
     }
-    dispatch(): void {
-        NotificationWorker._subscribers.forEach(subscriber => subscriber())
+    dispatch(instance: string): void {
+        NotificationWorker._subscribers[instance].forEach(subscriber => subscriber())
     }
 }
