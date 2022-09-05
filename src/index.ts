@@ -3,55 +3,98 @@ import "./lib/Theme.js"
 let fileName = ""
 //ṁḥāīūṛṅñḍṇṭṣś
 
-const keys = [
-    "m*",
-    "h.",
-    "a_",
-    "i_",
-    "u_",
-    "r.",
-    "n*",
-    "n~",
-    "d.",
-    "n.",
-    "t.",
-    "s.",
-    "s`"
+/*
+é
+É à À è È ù Ù â Â ê Ê î Î ô Ô û Û ë Ë ï Ï ü Ü ç Ç œ Œ « » €
+*/
+
+const
+keys = [
+    "e'",
+    "E'",
+    "a`",
+    "A`",
+    "e`",
+    "E`",
+    "u`",
+    "U`",
+    "a^",
+    "A^",
+    "e^",
+    "E^",
+    "i^",
+    "I^",
+    "o^",
+    "O^",
+    "u^",
+    "U^",
+    "e:",
+    "E:",
+    "i:",
+    "I:",
+    "u:",
+    "U:",
+    "c,",
+    "C,",
+    "aae",
+    "AAE",
+    "<<",
+    ">>",
+    "$",
 ]
 
 const replaceMap = {
-    "m*": {roman: "ṁ", type: "anusvāra", sound: "n in French word bon"},
-    "h.": {roman: "ḥ", type: "visarga", sound: "final h sound. When at the end repeat the preceding vowel aḥ = aha"},
-    "a_": {roman: "ā", type: "vowel", sound: "a in far"},
-    "i_": {roman: "ī", type: "vowel", sound: "ee in green"},
-    "u_": {roman: "ū", type: "vowel", sound: "u in rule"},
-    "r.": {roman: "ṛ", type: "vowel", sound: "ri in rim (roll tongue from ridge above teeth to roof of mouth)"},
-    "n*": {roman: "ṅ", type: "guttural", sound: "n in sing"},
-    "n~": {roman: "ñ", type: "palatal", sound: "n in canyon"},
-    "d.": {roman: "ḍ", type: "cerebral", sound: "d in dove (tip of tongue on roof of mouth)"},
-    "n.": {roman: "ṇ", type: "cerebral", sound: "n in nut (tip of tongue on roof of mouth)"},
-    "t.": {roman: "ṭ", type: "cerebral", sound: "t in tub (tip of tongue on roof of mouth)"},
-    "s.": {roman: "ṣ", type: "sibilant", sound: "sh in shine (tip of tongue on roof of mouth)"},
-    "s`": {roman: "ś", type: "sibilant", sound: "s in sprechen (tip of tongue on teeth)"},
+    "e'": {french: "é", type: "", sound: ""}, 
+    "E'": {french: "É", type: "", sound: ""},
+    "a`": {french: "à", type: "", sound: ""},
+    "A`": {french: "À", type: "", sound: ""},
+    "e`": {french: "è", type: "", sound: ""},
+    "E`": {french: "È", type: "", sound: ""},
+    "u`": {french: "ù", type: "", sound: ""},
+    "U`": {french: "Ù", type: "", sound: ""},
+    "a^": {french: "â", type: "", sound: ""},
+    "A^": {french: "Â", type: "", sound: ""},
+    "e^": {french: "ê", type: "", sound: ""},
+    "E^": {french: "Ê", type: "", sound: ""},
+    "i^": {french: "î", type: "", sound: ""},
+    "I^": {french: "Î", type: "", sound: ""},
+    "o^": {french: "ô", type: "", sound: ""},
+    "O^": {french: "Ô", type: "", sound: ""},
+    "u^": {french: "û", type: "", sound: ""},
+    "U^": {french: "Û", type: "", sound: ""},
+    "e:": {french: "ë", type: "The e sound it Noel or ", sound: ""},
+    "E:": {french: "Ë", type: "", sound: ""},
+    "i:": {french: "ï", type: "", sound: ""},
+    "I:": {french: "Ï", type: "", sound: ""},
+    "u:": {french: "ü", type: "", sound: ""},
+    "U:": {french: "Ü", type: "", sound: ""},
+    "c,": {french: "ç", type: "", sound: ""},
+    "C,": {french: "Ç", type: "", sound: ""},
+    "aae": {french: "œ", type: "", sound: ""},
+    "AAE": {french: "Œ", type: "", sound: ""},
+    "<<": {french: "«", type: "", sound: ""},
+    ">>": {french: "»", type: "", sound: ""},
+    "$": {french: "€", type: "", sound: ""},
+   
 }
 
-function keyUp(e: Event) {
+function keyDown(e: Event) {
     let matches = 0
     const textArea: HTMLTextAreaElement = (e.target as HTMLTextAreaElement)
     const selectionStart = textArea.selectionStart
     let value = textArea.value
-    value = value.replace(/m\*|n\*|a_|i_|u_|n~|s`|d\.|h\.|n\.|r\.|s\.|t\./g, (char) => {
+    value = value.replace(/e'|E'|a`|A`|e`|E`|u`|U`|a\^|A\^|e\^|E\^|i\^|I\^|o\^|O\^|u\^|U\^|e:|E:|i:|I:|u:|U:|c,|C,|aae|AAE|<<|>>|\$/g, (char) => {
         matches++
-        return replaceMap[char].roman || char
+        return replaceMap[char].french || char
     });
     textArea.value = value
     textArea.selectionStart = selectionStart - matches
     textArea.selectionEnd = textArea.selectionStart 
 }
 
-function insertRoman(e: Event) {
+function insertFrench(e: Event) {
     const cell = e.target as HTMLTableCellElement
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
     textArea.setRangeText(cell.textContent)
     textArea.focus()
     textArea.selectionStart = textArea.selectionStart + 1
@@ -63,15 +106,15 @@ function setupLegend() {
 
     keys.forEach((key) => {
         const row = table.insertRow()
-        const roman = row.insertCell()
+        const french = row.insertCell()
         const keyStroke = row.insertCell()
         const type = row.insertCell()
         const sound = row.insertCell()
 
-        roman.textContent = replaceMap[key].roman
-        roman.style.textAlign = "right"
-        roman.style.cursor = "pointer"
-        roman.onclick = insertRoman
+        french.textContent = replaceMap[key].french
+        french.style.textAlign = "right"
+        french.style.cursor = "pointer"
+        french.onclick = insertFrench
 
         keyStroke.textContent = key
 
@@ -89,7 +132,7 @@ function toggleLegend() {
 
 function positionEditorHint() {
     const hint = document.getElementById("editorHint")
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
 
     hint.style.top = `${textArea.offsetTop}px`
     hint.style.left = `${textArea.offsetLeft + 20}px`
@@ -97,7 +140,7 @@ function positionEditorHint() {
 
 function toggleEditorHint(e: Event) {
     const hint = document.getElementById("editorHint") 
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
     const shouldDisplay = textArea.value.trim() === ""
 
     if (shouldDisplay) {
@@ -110,12 +153,12 @@ function toggleEditorHint(e: Event) {
 }
 
 function navigateToGitHub() {
-    window.open("https://github.com/markdavich/sanskrit-lite.git", "_blank")
+    window.open("https://github.com/jaybirdthejaybird/sanskrit-lite", "_blank")
 }
 
 function positionDownloadButton() {
     const download = document.getElementById("downloadText")
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
 
     setTimeout(() => {
         download.style.top = `${textArea.offsetTop}px`
@@ -126,7 +169,7 @@ function positionDownloadButton() {
 
 function textAreaMouseUp() {
     const download = document.getElementById("downloadText")
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
     const shouldDisplay = textArea === document.activeElement && window.getSelection && window.getSelection().toString() !== ''
     download.style.display = shouldDisplay ? "block" : "none"
     fileName = shouldDisplay ? window.getSelection().toString() : ""
@@ -134,7 +177,7 @@ function textAreaMouseUp() {
 }
 
 function download(e: Event) {
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
 
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textArea.value));
@@ -148,12 +191,14 @@ function download(e: Event) {
     document.body.removeChild(element);
   }
 
+
+// Immdiately invoked function expression (iife)
 (() => {
     setupLegend()
-    const textArea = document.getElementById("sanskrit") as HTMLTextAreaElement
+    const textArea = document.getElementById("frenchTextArea") as HTMLTextAreaElement
     textArea.onblur = toggleEditorHint 
     textArea.onfocus = toggleEditorHint
-    textArea.onkeyup = keyUp;
+    textArea.onkeyup = keyDown;
     textArea.onmouseup = textAreaMouseUp
     new ResizeObserver(positionEditorHint).observe(textArea)
     document.getElementById("legendToggle").onclick = toggleLegend
@@ -163,3 +208,4 @@ function download(e: Event) {
     document.getElementById("downloadText").onclick = download
     positionEditorHint()
 })();
+
