@@ -57,7 +57,7 @@ const replaceMap = {
     "O^": { french: "Ô", type: "", sound: "" },
     "u^": { french: "û", type: "", sound: "" },
     "U^": { french: "Û", type: "", sound: "" },
-    "e:": { french: "ë", type: "", sound: "" },
+    "e:": { french: "ë", type: "The e sound it Noel or ", sound: "" },
     "E:": { french: "Ë", type: "", sound: "" },
     "i:": { french: "ï", type: "", sound: "" },
     "I:": { french: "Ï", type: "", sound: "" },
