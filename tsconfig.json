@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES2022",  /* Support for Class.name, Getters, Setters */
-        "rootDir": "src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-        "outDir": "app"   /* Redirect output structure to the directory. */
+        "rootDir": "src", /* This is where I write my code */
+        "outDir": "app"   /* This is where typescript puts the compiled code */
     }
 }
